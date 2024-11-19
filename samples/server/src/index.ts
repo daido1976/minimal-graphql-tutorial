@@ -6,7 +6,7 @@ import {
   Resolvers,
   Todo,
   TodoStatus,
-} from "./__generated__/resolvers-types";
+} from "./__generated__/resolvers-types.js";
 
 // データベース層の型
 type CategoryModel = {
