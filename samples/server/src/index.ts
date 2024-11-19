@@ -108,6 +108,11 @@ const resolvers: Resolvers = {
       categories.push(newCategory);
       return newCategory;
     },
+    cleanUp: () => {
+      todos.splice(0, todos.length);
+      categories.splice(0, categories.length);
+      return true;
+    },
   },
 };
 
