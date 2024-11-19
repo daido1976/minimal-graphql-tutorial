@@ -18,7 +18,7 @@ type TodoModel = {
   id: string;
   title: string;
   description?: string;
-  status: string;
+  status: TodoStatus;
   categoryId: string;
 };
 
@@ -29,13 +29,8 @@ const categories: CategoryModel[] = [];
 // `TodoModel`からGraphQLの`Todo`型へ変換するヘルパー関数
 const mapTodoModelToGraphQL = (todo: TodoModel): Todo => ({
   ...todo,
-  status: todo.status as TodoStatus,
+  status: todo.status,
   category: categories.find((category) => category.id === todo.categoryId),
-});
-
-// `CategoryModel`からGraphQLの`Category`型への変換（必要に応じて使用）
-const mapCategoryModelToGraphQL = (category: CategoryModel): Category => ({
-  ...category,
 });
 
 // GraphQLのリゾルバ
@@ -46,7 +41,7 @@ const resolvers: Resolvers = {
       const todo = todos.find((todo) => todo.id === args.id);
       return todo ? mapTodoModelToGraphQL(todo) : null;
     },
-    categories: () => categories.map(mapCategoryModelToGraphQL),
+    categories: () => categories,
   },
   Mutation: {
     addTodo: (_, args) => {
@@ -67,7 +62,7 @@ const resolvers: Resolvers = {
       if (args.title != null) todo.title = args.title;
       if (args.description != null)
         todo.description = args.description ?? undefined;
-      if (args.status != null) todo.status = args.status as string;
+      if (args.status != null) todo.status = args.status;
       if (args.categoryId != null) todo.categoryId = args.categoryId;
 
       return mapTodoModelToGraphQL(todo);
@@ -85,14 +80,8 @@ const resolvers: Resolvers = {
         name: args.name,
       };
       categories.push(newCategory);
-      return mapCategoryModelToGraphQL(newCategory);
+      return newCategory;
     },
-  },
-  Todo: {
-    category: (todo) =>
-      categories.find(
-        (category) => category.id === (todo as TodoModel).categoryId
-      ) || null,
   },
 };
 
