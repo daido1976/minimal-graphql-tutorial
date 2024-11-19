@@ -1,0 +1,40 @@
+type Category {
+  id: ID!
+  name: String!
+}
+
+type Todo {
+  id: ID!
+  title: String!
+  description: String
+  status: TodoStatus!
+  category: Category
+}
+
+enum TodoStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETE
+}
+
+type Query {
+  todos: [Todo!]!
+  todo(id: ID!): Todo
+  categories: [Category!]!
+}
+
+type Mutation {
+  addTodo(title: String!, description: String, categoryId: ID!): Todo!
+  updateTodo(
+    id: ID!
+    title: String
+    description: String
+    status: TodoStatus
+    categoryId: ID
+  ): Todo!
+  deleteTodo(id: ID!): Todo!
+  addCategory(name: String!): Category!
+
+  # テスト用: データを全て削除する
+  cleanUp: Boolean!
+}
