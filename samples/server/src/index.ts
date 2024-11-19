@@ -23,8 +23,34 @@ type TodoModel = {
 };
 
 // データ格納用の配列
-const todos: TodoModel[] = [];
-const categories: CategoryModel[] = [];
+const todos: TodoModel[] = [
+  {
+    id: "1",
+    title: "Create a sample project",
+    description: "Create a sample project using Apollo Server",
+    status: TodoStatus.Pending,
+    categoryId: "1",
+  },
+  {
+    id: "2",
+    title: "Write a blog post",
+    description: "Write a blog post about Apollo Server",
+    status: TodoStatus.Pending,
+    categoryId: "2",
+  },
+  {
+    id: "3",
+    title: "Deploy to the cloud",
+    description: "Deploy the project to the cloud",
+    status: TodoStatus.Pending,
+    categoryId: "3",
+  },
+];
+const categories: CategoryModel[] = [
+  { id: "1", name: "Development" },
+  { id: "2", name: "Writing" },
+  { id: "3", name: "Deployment" },
+];
 
 // `TodoModel`からGraphQLの`Todo`型へ変換するヘルパー関数
 const mapTodoModelToGraphQL = (todo: TodoModel): Todo => ({
