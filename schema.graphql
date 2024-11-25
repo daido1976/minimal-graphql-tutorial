@@ -5,16 +5,14 @@ type Category {
 
 type Todo {
   id: ID!
-  title: String!
-  description: String
+  content: String!
   status: TodoStatus!
   category: Category
 }
 
 enum TodoStatus {
-  PENDING
   IN_PROGRESS
-  COMPLETE
+  DONE
 }
 
 type Query {
@@ -24,11 +22,10 @@ type Query {
 }
 
 type Mutation {
-  addTodo(title: String!, description: String, categoryId: ID!): Todo!
+  addTodo(content: String!, categoryId: ID!): Todo!
   updateTodo(
     id: ID!
-    title: String
-    description: String
+    content: String
     status: TodoStatus
     categoryId: ID
   ): Todo!

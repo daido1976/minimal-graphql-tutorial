@@ -16,8 +16,7 @@ type CategoryModel = {
 
 type TodoModel = {
   id: string;
-  title: string;
-  description?: string;
+  content: string;
   status: TodoStatus;
   categoryId: string;
 };
@@ -26,23 +25,20 @@ type TodoModel = {
 const todos: TodoModel[] = [
   {
     id: "1",
-    title: "Create a sample project",
-    description: "Create a sample project using Apollo Server",
-    status: TodoStatus.Pending,
+    content: "Create a sample project",
+    status: TodoStatus.InProgress,
     categoryId: "1",
   },
   {
     id: "2",
-    title: "Write a blog post",
-    description: "Write a blog post about Apollo Server",
-    status: TodoStatus.Pending,
+    content: "Write a blog post",
+    status: TodoStatus.InProgress,
     categoryId: "2",
   },
   {
     id: "3",
-    title: "Deploy to the cloud",
-    description: "Deploy the project to the cloud",
-    status: TodoStatus.Pending,
+    content: "Deploy to the cloud",
+    status: TodoStatus.InProgress,
     categoryId: "3",
   },
 ];
@@ -73,9 +69,8 @@ const resolvers: Resolvers = {
     addTodo: (_, args) => {
       const newTodo: TodoModel = {
         id: (todos.length + 1).toString(),
-        title: args.title,
-        description: args.description ?? undefined,
-        status: TodoStatus.Pending,
+        content: args.content,
+        status: TodoStatus.InProgress,
         categoryId: args.categoryId,
       };
       todos.push(newTodo);
@@ -85,9 +80,7 @@ const resolvers: Resolvers = {
       const todo = todos.find((todo) => todo.id === args.id);
       if (!todo) throw new Error("Todo not found");
 
-      if (args.title != null) todo.title = args.title;
-      if (args.description != null)
-        todo.description = args.description ?? undefined;
+      if (args.content != null) todo.content = args.content;
       if (args.status != null) todo.status = args.status;
       if (args.categoryId != null) todo.categoryId = args.categoryId;
 

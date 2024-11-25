@@ -93,11 +93,10 @@ test.describe("GraphQL API tests", () => {
     const categoryId = addCategoryResult.addCategory.id;
 
     const addTodoResult = await graphqlRequest(
-      `mutation ($title: String!, $description: String, $categoryId: ID!) {
-        addTodo(title: $title, description: $description, categoryId: $categoryId) {
+      `mutation ($content: String!, $categoryId: ID!) {
+        addTodo(content: $content, categoryId: $categoryId) {
           id
-          title
-          description
+          content
           status
           category {
             id
@@ -105,23 +104,18 @@ test.describe("GraphQL API tests", () => {
           }
         }
       }`,
-      { title: "Test Todo", description: "This is a test", categoryId }
+      { content: "Test Todo", categoryId }
     );
 
     const todoId = addTodoResult.addTodo.id;
     assert.strictEqual(
-      addTodoResult.addTodo.title,
+      addTodoResult.addTodo.content,
       "Test Todo",
-      "addTodo title"
-    );
-    assert.strictEqual(
-      addTodoResult.addTodo.description,
-      "This is a test",
-      "addTodo description"
+      "addTodo content"
     );
     assert.strictEqual(
       addTodoResult.addTodo.status,
-      "PENDING",
+      "IN_PROGRESS",
       "addTodo status"
     );
     assert.strictEqual(
@@ -132,7 +126,7 @@ test.describe("GraphQL API tests", () => {
 
     // addTodo後のtodosクエリチェック
     const todosAfterAdd = await graphqlRequest(
-      `query { todos { id title category { id name } } }`
+      `query { todos { id content category { id name } } }`
     );
     assert.strictEqual(
       todosAfterAdd.todos.length,
@@ -140,9 +134,9 @@ test.describe("GraphQL API tests", () => {
       "todos count after addTodo"
     );
     assert.strictEqual(
-      todosAfterAdd.todos[0].title,
+      todosAfterAdd.todos[0].content,
       "Test Todo",
-      "todos first title after addTodo"
+      "todos first content after addTodo"
     );
     assert.strictEqual(
       todosAfterAdd.todos[0].category.name,
