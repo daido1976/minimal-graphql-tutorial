@@ -1,0 +1,3 @@
+- samples/client を react で実装
+- README に仕様をちゃんと書く
+- samples/server に gqlgen 版を書く
