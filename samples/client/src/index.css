@@ -9,7 +9,7 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 20px;
   background-color: var(--background-color);
@@ -19,7 +19,7 @@ body {
 
 .app-container {
   background-color: var(--card-background);
-  padding: 30px;
+  padding: 30px 20px;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -112,6 +112,7 @@ select {
 
 .todo-list {
   margin-top: 30px;
+  flex: 1;
 }
 
 .todo-item {
@@ -162,4 +163,32 @@ select {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.content-container {
+  display: flex;
+  gap: 30px;
+}
+
+.category-list {
+  flex: 0 0 200px;
+}
+
+.category-list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.category-item {
+  background-color: var(--background-color);
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.todo-item.done .todo-content span {
+  text-decoration: line-through;
+  color: #7f8c8d;
 }

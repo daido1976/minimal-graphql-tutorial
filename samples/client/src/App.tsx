@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
 import AddCategory from "./components/AddCategory";
+import CategoryList from "./components/CategoryList";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql", // GraphQLサーバーのURLを適切に設定してください
@@ -12,11 +13,16 @@ const client = new ApolloClient({
 const App: React.FC = () => {
   return (
     <ApolloProvider client={client}>
-      <div>
+      <div className="app-container">
         <h1>Todo App</h1>
-        <AddCategory />
-        <AddTodo />
-        <TodoList />
+        <div className="form-container">
+          <AddCategory />
+          <AddTodo />
+        </div>
+        <div className="content-container">
+          <CategoryList />
+          <TodoList />
+        </div>
       </div>
     </ApolloProvider>
   );

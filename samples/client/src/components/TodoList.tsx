@@ -22,9 +22,12 @@ const TodoList: React.FC = () => {
   return (
     <ul className="todo-list">
       {data.todos.map((todo: any) => (
-        <li key={todo.id} className="todo-item">
+        <li
+          key={todo.id}
+          className={`todo-item ${todo.status === "DONE" ? "done" : ""}`}
+        >
           <div className="todo-content">
-            {todo.content}
+            <span>{todo.content}</span>
             {todo.category && (
               <span className="todo-category">({todo.category.name})</span>
             )}
