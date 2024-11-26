@@ -12,7 +12,10 @@ const AddTodo: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!content.trim() || !categoryId) return;
+    if (!content.trim()) {
+      alert("todo content is empty");
+      return;
+    }
     addTodo({ variables: { content, categoryId } });
     setContent("");
     setCategoryId("");
