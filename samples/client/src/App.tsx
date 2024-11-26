@@ -4,6 +4,7 @@ import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
 import AddCategory from "./components/AddCategory";
 import CategoryList from "./components/CategoryList";
+import "./App.css";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql", // GraphQLサーバーのURLを適切に設定してください
