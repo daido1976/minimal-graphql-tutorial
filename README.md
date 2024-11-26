@@ -16,6 +16,13 @@ GraphQL 未経験者のための最小限の GraphQL チュートリアルです
 
 Node.js(TypeScript) + Apollo Server を利用したサンプルの実装が [samples/server](./samples/server/) ディレクトリに置いてあるので参考にしてみてください。
 
+サンプル実装のサーバは以下のコマンドで立ち上がります。
+
+```sh
+$ (cd samples/server && npm i && npm run start)
+# http://localhost:4000/ で GraphQL サーバの開発ツールである Apollo Sandbox にアクセス可能
+```
+
 ### テストの実施
 
 サーバ実装には簡易的な E2E テストを用意しています。
@@ -38,6 +45,16 @@ GRAPHQL_ENDPOINT=http://localhost:4000 node --test tests/test_graphql.mjs
 「{任意の開発言語/プラットフォーム} graphql client」などで検索するとその言語でメジャーな GraphQL クライアント用のライブラリがヒットするはずなので、それを使いましょう。もしくは生成 AI に聞いても良いでしょう。
 
 React(TypeScript) + Apollo Client を利用したサンプルの実装が [samples/client](./samples/client/) ディレクトリに置いてあるので参考にしてみてください。
+
+サンプル実装のアプリケーションは以下のコマンドで立ち上がります。
+
+```sh
+# サンプル実装のサーバを立ち上げる
+$ (cd samples/server && npm i && npm run start)
+# ターミナルで別のタブを開いてサンプル実装のクライアントを立ち上げる
+$ (cd samples/client && npm i && npm run start)
+# http://localhost:5173/ にアクセス
+```
 
 ### クライアントアプリケーションの仕様
 
