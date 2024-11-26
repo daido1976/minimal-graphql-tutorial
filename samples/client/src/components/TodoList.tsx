@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_TODOS, UPDATE_TODO, DELETE_TODO } from "../graphql/queries";
+import { TodoStatus } from "../__generated__/graphql";
 
 const TodoList: React.FC = () => {
   const { loading, error, data } = useQuery(GET_TODOS);
@@ -11,7 +11,7 @@ const TodoList: React.FC = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const handleStatusChange = (id: string, status: string) => {
+  const handleStatusChange = (id: string, status: TodoStatus) => {
     updateTodo({ variables: { id, status } });
   };
 
@@ -21,10 +21,12 @@ const TodoList: React.FC = () => {
 
   return (
     <ul className="todo-list">
-      {data.todos.map((todo: any) => (
+      {data?.todos.map((todo) => (
         <li
           key={todo.id}
-          className={`todo-item ${todo.status === "DONE" ? "done" : ""}`}
+          className={`todo-item ${
+            todo.status === TodoStatus.Done ? "done" : ""
+          }`}
         >
           <div className="todo-content">
             <span>{todo.content}</span>
@@ -35,11 +37,13 @@ const TodoList: React.FC = () => {
           <div className="todo-actions">
             <select
               value={todo.status}
-              onChange={(e) => handleStatusChange(todo.id, e.target.value)}
+              onChange={(e) =>
+                handleStatusChange(todo.id, e.target.value as TodoStatus)
+              }
               className="todo-status"
             >
-              <option value="IN_PROGRESS">In Progress</option>
-              <option value="DONE">Done</option>
+              <option value={TodoStatus.InProgress}>In Progress</option>
+              <option value={TodoStatus.Done}>Done</option>
             </select>
             <button
               onClick={() => handleDelete(todo.id)}

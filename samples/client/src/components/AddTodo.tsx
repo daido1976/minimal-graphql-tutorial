@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_TODO, GET_TODOS, GET_CATEGORIES } from "../graphql/queries";
@@ -34,7 +33,7 @@ const AddTodo: React.FC = () => {
         className="category-select"
       >
         <option value="">Select category</option>
-        {categoriesData?.categories.map((category: any) => (
+        {categoriesData?.categories.map((category) => (
           <option key={category.id} value={category.id}>
             {category.name}
           </option>

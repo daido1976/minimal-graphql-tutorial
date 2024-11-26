@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_CATEGORIES } from "../graphql/queries";
@@ -13,7 +12,7 @@ const CategoryList: React.FC = () => {
     <div className="category-list">
       <h2>Categories</h2>
       <ul>
-        {data.categories.map((category: any) => (
+        {data?.categories.map((category) => (
           <li key={category.id} className="category-item">
             {category.name}
           </li>
