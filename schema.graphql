@@ -1,37 +1,109 @@
+"""
+カテゴリを表します。例えば「家事」や「趣味」など。
+"""
 type Category {
+  """
+  カテゴリの一意なID
+  """
   id: ID!
+
+  """
+  カテゴリの名前
+  """
   name: String!
 }
 
+"""
+Todoを表します。進捗状況やカテゴリが含まれます。
+"""
 type Todo {
+  """
+  Todoの一意なID
+  """
   id: ID!
+
+  """
+  Todoの内容
+  """
   content: String!
+
+  """
+  Todoの進捗状況
+  """
   status: TodoStatus!
+
+  """
+  このTodoに関連付けられたカテゴリ
+  """
   category: Category
 }
 
+"""
+Todoの進捗状況を表します。
+"""
 enum TodoStatus {
+  """
+  Todoが進行中であることを表します。
+  """
   IN_PROGRESS
+
+  """
+  Todoが完了したことを表します。
+  """
   DONE
 }
 
+"""
+Todoやカテゴリを取得するためのクエリ
+"""
 type Query {
+  """
+  全てのTodoを取得します。
+  """
   todos: [Todo!]!
+
+  """
+  指定したIDのTodoを取得します。
+  """
   todo(id: ID!): Todo
+
+  """
+  全てのカテゴリを取得します。
+  """
   categories: [Category!]!
 }
 
+"""
+Todoやカテゴリを作成・更新・削除するためのミューテーション
+"""
 type Mutation {
+  """
+  新しいTodoを作成します。
+  """
   addTodo(content: String!, categoryId: ID!): Todo!
+
+  """
+  既存のTodoを更新します。
+  """
   updateTodo(
     id: ID!
     content: String
     status: TodoStatus
     categoryId: ID
   ): Todo!
+
+  """
+  指定したIDのTodoを削除します。
+  """
   deleteTodo(id: ID!): Todo!
+
+  """
+  新しいカテゴリを作成します。
+  """
   addCategory(name: String!): Category!
 
-  # テスト用: データを全て削除する
+  """
+  【テスト用】全てのデータを削除します。
+  """
   cleanUp: Boolean!
 }

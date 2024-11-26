@@ -21,29 +21,28 @@ type TodoModel = {
   categoryId: string;
 };
 
+// サンプルデータを初期値として用意
 const categories: CategoryModel[] = [
-  { id: randomUUID(), name: "Development" },
-  { id: randomUUID(), name: "Writing" },
-  { id: randomUUID(), name: "Deployment" },
+  { id: randomUUID(), name: "家事" },
+  { id: randomUUID(), name: "仕事" },
+  { id: randomUUID(), name: "趣味" },
 ];
-
-// データ格納用の配列
 const todos: TodoModel[] = [
   {
     id: randomUUID(),
-    content: "Create a sample project",
+    content: "部屋を掃除する",
     status: TodoStatus.InProgress,
     categoryId: categories[0].id,
   },
   {
     id: randomUUID(),
-    content: "Write a blog post",
+    content: "会議の資料を作成する",
     status: TodoStatus.InProgress,
     categoryId: categories[1].id,
   },
   {
     id: randomUUID(),
-    content: "Deploy to the cloud",
+    content: "ギターの練習をする",
     status: TodoStatus.InProgress,
     categoryId: categories[2].id,
   },
