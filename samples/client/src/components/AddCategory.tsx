@@ -16,14 +16,17 @@ const AddCategory: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="add-category-form">
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="New category"
+        className="category-input"
       />
-      <button type="submit">Add Category</button>
+      <button type="submit" className="add-btn">
+        Add Category
+      </button>
     </form>
   );
 };

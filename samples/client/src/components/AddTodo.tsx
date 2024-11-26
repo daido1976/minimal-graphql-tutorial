@@ -20,16 +20,18 @@ const AddTodo: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="add-todo-form">
       <input
         type="text"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="New todo"
+        className="todo-input"
       />
       <select
         value={categoryId}
         onChange={(e) => setCategoryId(e.target.value)}
+        className="category-select"
       >
         <option value="">Select category</option>
         {categoriesData?.categories.map((category: any) => (
@@ -38,7 +40,9 @@ const AddTodo: React.FC = () => {
           </option>
         ))}
       </select>
-      <button type="submit">Add Todo</button>
+      <button type="submit" className="add-btn">
+        Add Todo
+      </button>
     </form>
   );
 };

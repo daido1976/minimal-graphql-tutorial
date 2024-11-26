@@ -20,19 +20,31 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <ul>
+    <ul className="todo-list">
       {data.todos.map((todo: any) => (
-        <li key={todo.id}>
-          {todo.content} - {todo.status}
-          {todo.category && ` (${todo.category.name})`}
-          <select
-            value={todo.status}
-            onChange={(e) => handleStatusChange(todo.id, e.target.value)}
-          >
-            <option value="IN_PROGRESS">In Progress</option>
-            <option value="DONE">Done</option>
-          </select>
-          <button onClick={() => handleDelete(todo.id)}>Delete</button>
+        <li key={todo.id} className="todo-item">
+          <div className="todo-content">
+            {todo.content}
+            {todo.category && (
+              <span className="todo-category">({todo.category.name})</span>
+            )}
+          </div>
+          <div className="todo-actions">
+            <select
+              value={todo.status}
+              onChange={(e) => handleStatusChange(todo.id, e.target.value)}
+              className="todo-status"
+            >
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="DONE">Done</option>
+            </select>
+            <button
+              onClick={() => handleDelete(todo.id)}
+              className="delete-btn"
+            >
+              Delete
+            </button>
+          </div>
         </li>
       ))}
     </ul>
