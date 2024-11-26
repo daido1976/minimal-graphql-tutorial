@@ -1,8 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
+import { randomUUID } from "node:crypto";
 import {
-  Category,
   Resolvers,
   Todo,
   TodoStatus,
@@ -21,31 +21,32 @@ type TodoModel = {
   categoryId: string;
 };
 
+const categories: CategoryModel[] = [
+  { id: randomUUID(), name: "Development" },
+  { id: randomUUID(), name: "Writing" },
+  { id: randomUUID(), name: "Deployment" },
+];
+
 // データ格納用の配列
 const todos: TodoModel[] = [
   {
-    id: "1",
+    id: randomUUID(),
     content: "Create a sample project",
     status: TodoStatus.InProgress,
-    categoryId: "1",
+    categoryId: categories[0].id,
   },
   {
-    id: "2",
+    id: randomUUID(),
     content: "Write a blog post",
     status: TodoStatus.InProgress,
-    categoryId: "2",
+    categoryId: categories[1].id,
   },
   {
-    id: "3",
+    id: randomUUID(),
     content: "Deploy to the cloud",
     status: TodoStatus.InProgress,
-    categoryId: "3",
+    categoryId: categories[2].id,
   },
-];
-const categories: CategoryModel[] = [
-  { id: "1", name: "Development" },
-  { id: "2", name: "Writing" },
-  { id: "3", name: "Deployment" },
 ];
 
 // `TodoModel`からGraphQLの`Todo`型へ変換するヘルパー関数
@@ -68,7 +69,7 @@ const resolvers: Resolvers = {
   Mutation: {
     addTodo: (_, args) => {
       const newTodo: TodoModel = {
-        id: (todos.length + 1).toString(),
+        id: randomUUID(),
         content: args.content,
         status: TodoStatus.InProgress,
         categoryId: args.categoryId,
@@ -95,7 +96,7 @@ const resolvers: Resolvers = {
     },
     addCategory: (_, args) => {
       const newCategory: CategoryModel = {
-        id: (categories.length + 1).toString(),
+        id: randomUUID(),
         name: args.name,
       };
       categories.push(newCategory);
