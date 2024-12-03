@@ -1,6 +1,6 @@
-import { gql } from "../__generated__/gql";
+import { graphql } from "../__generated__/gql";
 
-export const GET_TODOS = gql(`
+export const GET_TODOS = graphql(`
   query GetTodos {
     todos {
       id
@@ -14,7 +14,7 @@ export const GET_TODOS = gql(`
   }
 `);
 
-export const GET_CATEGORIES = gql(`
+export const GET_CATEGORIES = graphql(`
   query GetCategories {
     categories {
       id
@@ -23,7 +23,7 @@ export const GET_CATEGORIES = gql(`
   }
 `);
 
-export const ADD_TODO = gql(`
+export const ADD_TODO = graphql(`
   mutation AddTodo($content: String!, $categoryId: ID!) {
     addTodo(content: $content, categoryId: $categoryId) {
       id
@@ -37,7 +37,7 @@ export const ADD_TODO = gql(`
   }
 `);
 
-export const UPDATE_TODO = gql(`
+export const UPDATE_TODO = graphql(`
   mutation UpdateTodo(
     $id: ID!
     $content: String
@@ -61,7 +61,7 @@ export const UPDATE_TODO = gql(`
   }
 `);
 
-export const DELETE_TODO = gql(`
+export const DELETE_TODO = graphql(`
   mutation DeleteTodo($id: ID!) {
     deleteTodo(id: $id) {
       id
@@ -69,7 +69,7 @@ export const DELETE_TODO = gql(`
   }
 `);
 
-export const ADD_CATEGORY = gql(`
+export const ADD_CATEGORY = graphql(`
   mutation AddCategory($name: String!) {
     addCategory(name: $name) {
       id

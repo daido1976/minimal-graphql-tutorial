@@ -113,7 +113,7 @@ const resolvers: Resolvers = {
 const typeDefs = readFileSync("../../schema.graphql", { encoding: "utf-8" });
 
 // Apollo Serverのセットアップ
-const server = new ApolloServer({
+const server = new ApolloServer<{}>({
   typeDefs,
   resolvers,
 });
